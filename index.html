@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel de Mapas Zabbix</title>
+  <script>
+    const maps = [
+      "http://monitoramento.guarapari.es.gov.br/zabbix/zabbix.php?action=map.view&sysmapid=13",
+      "http://monitoramento.guarapari.es.gov.br/zabbix/zabbix.php?action=map.view&sysmapid=7",
+      "http://monitoramento.guarapari.es.gov.br/zabbix/zabbix.php?action=map.view&sysmapid=12",
+      "http://monitoramento.guarapari.es.gov.br/zabbix/zabbix.php?action=map.view&sysmapid=14",
+      "http://monitoramento.guarapari.es.gov.br/zabbix/zabbix.php?action=map.view&sysmapid=8",
+      "http://monitoramento.guarapari.es.gov.br/zabbix/zabbix.php?action=map.view&sysmapid=10",
+      "http://monitoramento.guarapari.es.gov.br/zabbix/zabbix.php?action=map.view&sysmapid=15",
+      "http://monitoramento.guarapari.es.gov.br/zabbix/zabbix.php?action=map.view&sysmapid=16"
+    ];
+
+    let index = 0;
+    let mapWindow = null;
+
+    function openNextMap() {
+      if (mapWindow == null || mapWindow.closed) {
+        mapWindow = window.open(maps[index], "_blank");
+      } else {
+        mapWindow.location.href = maps[index];
+      }
+      index = (index + 1) % maps.length;
+    }
+
+    setTimeout(() => {
+      openNextMap();
+      setInterval(openNextMap, 30000);
+    }, 30000);
+  </script>
+</head>
+<body>
+  <h2 style="text-align:center; margin-top: 20%;">
+    Você será redirecionado para o painel de mapas em uma nova aba.<br><br>
+    Certifique-se de estar logado no Zabbix!
+  </h2>
+</body>
+</html>
